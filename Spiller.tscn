@@ -1,19 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/art/playerGrey_up1.png" type="Texture" id=1]
 [ext_resource path="res://Spiller.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/playerGrey_walk1.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/playerGrey_walk2.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/playerGrey_up2.png" type="Texture" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
-"name": "default",
+"name": "hoyre",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "opp",
 "speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 57.0
-height = 24.0
+radius = 28.0
+height = 10.0
 
 [node name="Spiller" type="Area2D"]
 script = ExtResource( 2 )
@@ -22,7 +30,9 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
+animation = "hoyre"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
