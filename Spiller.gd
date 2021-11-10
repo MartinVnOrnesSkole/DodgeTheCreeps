@@ -1,4 +1,5 @@
 extends Area2D
+signal hit
 
 export var maks_hastighet = 400  # Hvor fort spilleren beveger seg (pixels/sec).
 var skjerm_storrelse  
@@ -40,3 +41,9 @@ func _process(delta):
 	position.x = clamp(position.x, 0, skjerm_storrelse.x)
 	position.y = clamp(position.y, 0, skjerm_storrelse.y)
 	
+
+
+func _on_Spiller_body_entered(body):
+	hide()
+	emit_signal("hit")
+	$CollisionShape2D.set_deferred("disabled", true)
