@@ -6,6 +6,7 @@ var skjerm_storrelse
 
 func _ready():
 	skjerm_storrelse = get_viewport_rect().size
+	hide()
 	
 func _process(delta):
 	var bevegelse = Vector2() 

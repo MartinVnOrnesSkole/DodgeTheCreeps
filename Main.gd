@@ -5,19 +5,20 @@ var poeng
 
 func _ready():
 	randomize()
-	new_game()
 
 
 func game_over():
 	$PoengTimer.stop()
 	$FiendeTimer.stop()
-	print("Game over")
+	$HUD.vis_game_over()
 
 
 func new_game():
 	poeng = 0
 	$Spiller.start($StartPosisjon.position)
 	$StartTimer.start()
+	$HUD.oppdater_poeng(poeng)
+	$HUD.vis_beskjed("Get Ready")
 
 
 func _on_FiendeTimer_timeout():
@@ -43,6 +44,7 @@ func _on_FiendeTimer_timeout():
 
 func _on_PoengTimer_timeout():
 	poeng += 1
+	$HUD.oppdater_poeng(poeng)
 
 
 func _on_StartTimer_timeout():
