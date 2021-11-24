@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Spiller.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Main.gd" type="Script" id=2]
+[ext_resource path="res://Fiende.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -8,9 +10,10 @@ _data = {
 }
 
 [node name="Main" type="Node"]
+script = ExtResource( 2 )
+Fiende = ExtResource( 3 )
 
 [node name="Spiller" parent="." instance=ExtResource( 1 )]
-visible = false
 
 [node name="FiendeTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -22,10 +25,14 @@ wait_time = 2.0
 one_shot = true
 
 [node name="StartPosisjon" type="Position2D" parent="."]
-visible = false
 position = Vector2( 512, 298 )
 
 [node name="FiendePath" type="Path2D" parent="."]
 curve = SubResource( 1 )
 
 [node name="FiendeSpawnPoint" type="PathFollow2D" parent="FiendePath"]
+
+[connection signal="hit" from="Spiller" to="." method="game_over"]
+[connection signal="timeout" from="FiendeTimer" to="." method="_on_FiendeTimer_timeout"]
+[connection signal="timeout" from="PoengTimer" to="." method="_on_PoengTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
